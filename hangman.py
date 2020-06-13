@@ -68,16 +68,11 @@ def get_guessed_word(secret_word, letters_guessed):
       which letters in secret_word have been guessed so far.
     '''
     str = ""
-    guesses = list(letters_guessed)
     for letter in secret_word:
-        length = len(string)
-        for i in range(len(guesses)):
-            if guesses[i] == letter:
-                del guesses[i]
-                str += letter
-                break
-        if length == len(string):
-            str += "_"
+        if letter in letters_guessed:
+            str+=letter
+        else:
+            str+='_'
     return str
 
 
