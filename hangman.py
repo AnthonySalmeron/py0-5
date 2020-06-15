@@ -50,10 +50,10 @@ def is_word_guessed(secret_word, letters_guessed):
     returns: boolean, True if all the letters of secret_word are in letters_guessed;
       False otherwise
     '''
-    for letter in letter_guessed:
+    for letter in letters_guessed:
         if letter not in secret_word:
             return False
-    return True
+    return len(letters_guessed) == len(secret_word)
 
 
 def get_guessed_word(secret_word, letters_guessed):
@@ -111,10 +111,42 @@ def hangman(secret_word):
 
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    print('Word is ', len(secret_word),' characters long')
+    guesses_left = 6
+    guesses = []
+    while guesses_left > 0:
+        print('You have ', guesses_left,' guesses remaining')
+        available = get_available_letters(guesses)
+        print('Available letters: ',available)
+        new = ''
+        new = input('Guess a new char: ').lower()
+        tries = 0
+        while len(new) != 1 or new in guesses or new not in string.ascii_lowercase:
+             new = input('Please guess a new (single) alphabet char: ').lower()
+             tries+=1
+             if tries==3:
+                 guesses_left -= 1
+                 print("You've lost a guess, you have ",guesses_left,' remaining')
+                 tries= 0
+             if guesses_left == 0:
+                 print('You lose')
+                 return
+        guesses.append(new)
+        if new in secret_word:
+            print('Congrats! You guessed a correct letter')
+            if is_word_guessed(secret_word, guesses):
+                print('Congrats! You won! The word was ',secret_word)
+                return
+        else:
+            print('Sorry, guess again')
+        print("Here's the word so far: ", get_guessed_word(secret_word, guesses))
+        print('-------------------------------------------------------------')
+        guesses_left -= 1
+    print('You lose, the word was ',secret_word)
 
 
+
+hangman(choose_word(wordlist))
 
 # When you've completed your hangman function, scroll down to the bottom
 # of the file and uncomment the first two lines to test
@@ -193,14 +225,14 @@ def hangman_with_hints(secret_word):
 # Hint: You might want to pick your own secret_word while you're testing.
 
 
-if __name__ == "__main__":
-    # pass
-
-    # To test part 2, comment out the pass line above and
-    # uncomment the following two lines.
-
-    secret_word = choose_word(wordlist)
-    hangman(secret_word)
+# if __name__ == "__main__":
+#     # pass
+#
+#     # To test part 2, comment out the pass line above and
+#     # uncomment the following two lines.
+#
+#     secret_word = choose_word(wordlist)
+#     hangman(secret_word)
 
 ###############
 
