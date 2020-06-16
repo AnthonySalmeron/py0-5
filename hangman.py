@@ -122,6 +122,7 @@ def hangman(secret_word):
         new = input('Guess a new char: ').lower()
         tries = 0
         while len(new) != 1 or new in guesses or new not in string.ascii_lowercase:
+             print(tries," tries left till you lose a guess")
              new = input('Please guess a new (single) alphabet char: ').lower()
              tries+=1
              if tries==3:
@@ -139,14 +140,13 @@ def hangman(secret_word):
                 return
         else:
             print('Sorry, guess again')
+            guesses_left -= 1
         print("Here's the word so far: ", get_guessed_word(secret_word, guesses))
         print('-------------------------------------------------------------')
-        guesses_left -= 1
     print('You lose, the word was ',secret_word)
 
 
 
-hangman(choose_word(wordlist))
 
 # When you've completed your hangman function, scroll down to the bottom
 # of the file and uncomment the first two lines to test
@@ -225,14 +225,14 @@ def hangman_with_hints(secret_word):
 # Hint: You might want to pick your own secret_word while you're testing.
 
 
-# if __name__ == "__main__":
-#     # pass
-#
-#     # To test part 2, comment out the pass line above and
-#     # uncomment the following two lines.
-#
-#     secret_word = choose_word(wordlist)
-#     hangman(secret_word)
+if __name__ == "__main__":
+    # pass
+
+    # To test part 2, comment out the pass line above and
+    # uncomment the following two lines.
+
+    secret_word = choose_word(wordlist)
+    hangman(secret_word)
 
 ###############
 
