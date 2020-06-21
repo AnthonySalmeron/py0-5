@@ -1,7 +1,7 @@
 # Problem Set 2, hangman.py
 
 # Hangman Game
-# -----------------------------------
+# ----------------------------------
 import random
 import string
 
