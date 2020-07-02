@@ -201,7 +201,19 @@ def is_valid_word(word, hand, word_list):
     returns: boolean
     """
 
-    pass  # TO DO... Remove this line when you implement this function
+    assert isinstance(word,str), 'Word needs to be string'
+    assert isinstance(hand,dict), "Hand needs to be dictionary"
+    word = word.lower()
+    if word in word_list:
+        handCopy = hand.copy()
+        for letter in word:
+            if handCopy.get(letter,0):
+                handCopy[letter] = handCopy.get(letter)-1
+            else:
+                return False
+        return True
+    return False
+
 
 #
 # Problem #5: Playing a hand
