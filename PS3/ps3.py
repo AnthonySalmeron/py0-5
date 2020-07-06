@@ -231,8 +231,11 @@ def calculate_handlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-
-    pass  # TO DO... Remove this line when you implement this function
+    assert isinstance(hand, dict), 'Hand argument must be dict'
+    return sum(list(hand.values()))
+    # hand.values() returns a view object, which has some interfaces that
+    # work the same as length (ie len()), but it isn't a list, it constantly
+    # updates to reflect the value of the dict, it can be converted to a list though
 
 def play_hand(hand, word_list):
 
