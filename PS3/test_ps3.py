@@ -253,7 +253,7 @@ def test_calculate_handlen():
     test_num = calculate_handlen(hand)
     if test_num != length:
         print("FAILURE: test_calculate_handlen()")
-        print("\tExpected '"+length+",' but got '"+test_num+"' for hand:", hand)
+        print("\tExpected '"+str(length)+",' but got '"+str(test_num)+"' for hand:", hand)
     else:
         print("SUCCESS: test_calculate_handlen()")
 
