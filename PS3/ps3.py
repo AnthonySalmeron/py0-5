@@ -321,10 +321,11 @@ def substitute_hand(hand, letter):
     """
     assert isinstance(hand,dict), 'Hand must be instance of dictionary'
     assert isinstance(letter,str), 'Letter must be string'
+    letter = letter.lower()
+    if letter not in hand:
+        return hand
     copy = hand.copy()
     alphabet = list(SCRABBLE_LETTER_VALUES.keys())
-    if letter not in alphabet or letter not in hand:
-        return copy
     for let in copy:
         if let == letter:
             occurences = copy.get(let,0)
@@ -367,9 +368,32 @@ def play_game(word_list):
 
     word_list: list of lowercase strings
     """
+    number_of_hands = ""
+    while not isinstance(number_of_hands,int):
+        number_of_hands = int(input('How many hands would you like to play? Give integer value: '))
 
-    print("play_game not implemented.") # TO DO... Remove this line when you implement this function
+    game_score = 0
+    hand_repeat = 1
+    for i in range(number_of_hands):
+        print("=================================================")
+        hand = deal_hand(7)
+        print('Your hand is ')
+        display_hand(hand)
 
+        want_sub = input('Do you want to substitute a character in the hand? If so type the letter, else type anything else ')
+        hand = substitute_hand(hand,want_sub)
+        print('New hand is')
+        display_hand(hand)
+
+        score = play_hand(hand,word_list)
+        if hand_repeat:
+            repeat = input('ONE TIME ONLY: if you want to repeat the game with this hand, type Y else type anything else ')
+            if repeat == "Y":
+                score = play_hand(hand,word_list)
+                hand_repeat = 0
+        game_score += score
+    print("FINAL SCORE: "+ str(game_score))
+    return game_score
 
 
 #
