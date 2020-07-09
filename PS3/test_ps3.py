@@ -257,6 +257,31 @@ def test_calculate_handlen():
     else:
         print("SUCCESS: test_calculate_handlen()")
 
+def test_substitute_hand():
+    hand = {'c': 1, 'o': 1, '*': 1, 'w': 1, 's':1, 'z':1, 'y': 2}
+    test1 = substitute_hand(hand, 'y')
+    failure = False
+    if(calculate_handlen(test1)!=calculate_handlen(hand)):
+        failure = True
+        print('Failure: length of hand not kept consistent between original ', hand, ' and new hand: ', test1)
+    for letter in test1:
+        if letter not in hand:
+            break
+    else:
+        print('Failure: no characters from hand ',hand, ' got replaced in new hand: ', test1)
+        failure = True
+
+    test2 = substitute_hand(hand, '21')
+    if(calculate_handlen(test2)!=calculate_handlen(hand)):
+        failure = True
+        print('Failure: length of hand not kept consistent between original ', hand, ' and new hand: ', test2)
+    for letter in test2:
+        if letter not in hand:
+            failure = True
+            print("Failure: given string not in hand, '21,' function still modified hand from ", hand, " to ", test2)
+            break
+    if not failure:
+        print('SUCCESS: test_substitute_hand()')
 
 
 word_list = load_words()
@@ -275,4 +300,7 @@ test_wildcard(word_list)
 print("----------------------------------------------------------------------")
 print("Testing calculate_handlen...")
 test_calculate_handlen()
+print("----------------------------------------------------------------------")
+print("Testing substitute_hand...")
+test_substitute_hand()
 print("All done!")

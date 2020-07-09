@@ -319,8 +319,22 @@ def substitute_hand(hand, letter):
     letter: string
     returns: dictionary (string -> int)
     """
-
-    pass  # TO DO... Remove this line when you implement this function
+    assert isinstance(hand,dict), 'Hand must be instance of dictionary'
+    assert isinstance(letter,str), 'Letter must be string'
+    copy = hand.copy()
+    alphabet = list(SCRABBLE_LETTER_VALUES.keys())
+    if letter not in alphabet or letter not in hand:
+        return copy
+    for let in copy:
+        if let == letter:
+            occurences = copy.get(let,0)
+            del copy[let]
+            new_letter = random.choice(alphabet)
+            while new_letter == "*":
+                new_letter = random.choice(alphabet)
+            copy[new_letter] = occurences
+            return copy
+    return copy
 
 
 def play_game(word_list):
