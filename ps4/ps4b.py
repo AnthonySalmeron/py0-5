@@ -208,17 +208,17 @@ class PlaintextMessage(Message):
 
 
 class CiphertextMessage(Message):
-    def __init__(self, text):
-        '''
-        Initializes a CiphertextMessage object
-
-        text (string): the message's text
-
-        a CiphertextMessage object has two attributes:
-            self.message_text (string, determined by input text)
-            self.valid_words (list, determined using helper function load_words)
-        '''
-        pass #delete this line and replace with your code here
+    # def __init__(self, text):
+    #     '''
+    #     Initializes a CiphertextMessage object
+    #
+    #     text (string): the message's text
+    #
+    #     a CiphertextMessage object has two attributes:
+    #         self.message_text (string, determined by input text)
+    #         self.valid_words (list, determined using helper function load_words)
+    #     '''
+    #     pass #delete this line and replace with your code here
 
     def decrypt_message(self):
         '''
