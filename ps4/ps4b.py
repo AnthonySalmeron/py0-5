@@ -136,7 +136,7 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         '''
-        shift_dict = build_shift_dict(shift)
+        shift_dict = self.build_shift_dict(shift)
         new_str = ""
         for let in self.message_text:
             if let not in shift_dict:
@@ -236,7 +236,7 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass #delete this line and replace with your code here
+        
 
 if __name__ == '__main__':
 
