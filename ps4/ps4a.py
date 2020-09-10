@@ -37,7 +37,7 @@ def get_permutations(sequence, sequence_dict=0, permutations={}, str=""):
             permutations[copy_str] = 1
             return
         get_permutations(sequence,copy_dict,permutations,copy_str)
-    return permutations
+    return list(permutations.keys())
 
 if __name__ == '__main__':
 #    #EXAMPLE
@@ -49,5 +49,6 @@ if __name__ == '__main__':
 #    # Put three example test cases here (for your sanity, limit your inputs
 #    to be three characters or fewer as you will have n! permutations for a
 #    sequence of length n)
-
+    # For whatever reason, this will take input literally in 3.8
+    # so you need to input the actual string ie. 'lrk'
     print(get_permutations(input('Put word here: ')))
