@@ -139,10 +139,7 @@ class Message(object):
         shift_dict = self.build_shift_dict(shift)
         new_str = ""
         for let in self.message_text:
-            if let not in shift_dict:
-                new_str += let
-                continue
-            new_str += shift_dict[let]
+            new_str += shift_dict.get(let,let)
         return new_str
 
 class PlaintextMessage(Message):
@@ -242,7 +239,7 @@ class CiphertextMessage(Message):
         message_text = PlaintextMessage(self.message_text,1)
         count = 0
         for word in message_text.message_text_encrypted.split():
-            if word in self.valid_words:
+            if is_word(self.valid_words,word):
                 count+=1
         if count > 0:
             best_shift = 1
@@ -252,7 +249,7 @@ class CiphertextMessage(Message):
             count = 0
             message_text.change_shift(i)
             for word in message_text.message_text_encrypted.split():
-                if word in self.valid_words:
+                if is_word(self.valid_words,word):
                     count+=1
             if count > max_word:
                 best_shift = i
@@ -272,3 +269,6 @@ if __name__ == '__main__':
    ciphertext = CiphertextMessage('jgnnq')
    print('Expected Output:', (24, 'hello'))
    print('Actual Output:', ciphertext.decrypt_message())
+
+   text = CiphertextMessage(get_story_string())
+   print(text.decrypt_message())
