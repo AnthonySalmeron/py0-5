@@ -27,8 +27,7 @@ def get_permutations(sequence, sequence_dict=0, permutations={}, str=""):
         for char in sequence:
             sequence_dict[char] = sequence_dict.get(char,0) + 1
     for letter in sequence_dict:
-        copy_str = str
-        copy_str += letter
+        copy_str = str + letter
         copy_dict = sequence_dict.copy()
         copy_dict[letter] = copy_dict.get(letter) - 1
         if not copy_dict.get(letter):
